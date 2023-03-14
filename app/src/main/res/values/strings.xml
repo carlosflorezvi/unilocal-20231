@@ -1,0 +1,32 @@
+<resources>
+    <string name="app_name">unilocal</string>
+
+    <!-- Textos son de el layout del main -->
+    <string name="txt_busqueda">Nombre del lugar</string>
+    <string name="txt_btn_registro">Ir a registro</string>
+    <string name="txt_btn_login">Ir a login</string>
+
+    <!-- Textos son de el layout del login -->
+    <string name="txt_email">Escriba su correo</string>
+    <string name="txt_password">Escriba su contraseña</string>
+    <string name="txt_login">Iniciar sesión</string>
+    <string name="txt_registro">Registrarse</string>
+
+    <!-- Textos del registro -->
+    <string name="txt_nombre">Escriba su nombre</string>
+    <string name="txt_nickname">Escriba su nickname</string>
+    <string name="usuario_creado">Usuario registrado correctamente</string>
+
+    <!-- Textos de crear lugar -->
+    <string name="txt_nombre_lugar">Nombre del lugar</string>
+    <string name="txt_descripcion_lugar">Descripción del lugar</string>
+    <string name="txt_telefono_lugar">Teléfono del lugar</string>
+    <string name="btn_crear_lugar">Crear nuevo lugar</string>
+
+    <!-- Textos de validaciones -->
+    <string name="es_obligatorio">Este campo es obligatorio</string>
+    <string name="maximo_caracteres">Máximo 10 caracteres</string>
+    <string name="datos_correctos">Los datos son correctos</string>
+    <string name="datos_incorrectos">Los datos son incorrectos</string>
+
+</resources>
