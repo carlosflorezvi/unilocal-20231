@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragmentos.MenuPrincipalFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_marginEnd="30dp"
+        android:layout_marginStart="30dp"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/fondo_busqueda">
+
+        <Button
+            android:id="@+id/btn_menu"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:textColor="@color/black"
+            android:fontFamily="@font/font_awesome_6_free_solid_900"
+            android:textSize="22sp"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:text="\uf0c9"/>
+
+        <EditText
+            android:id="@+id/texto_busqueda"
+            android:layout_width="290dp"
+            android:layout_height="50dp"
+            android:hint="@string/txt_busqueda"
+            android:imeOptions="actionSearch"
+            android:singleLine="true"
+            android:paddingStart="10dp"
+            android:paddingEnd="15dp"
+            android:background="@null"
+            android:drawableEnd="@drawable/ic_search" />
+
+    </LinearLayout>>
+
+</FrameLayout>

@@ -1,8 +1,8 @@
 package co.edu.eam.unilocal.modelo
 
-class Administrador(var id:Int, var nombre:String, var correo:String, var password:String) {
+class Administrador(id: Int, nombre: String, correo: String, password: String): Persona(id, nombre, correo, password) {
 
     override fun toString(): String {
-        return "Administrador(id=$id, nombre='$nombre', correo='$correo', password='$password')"
+        return "Administrador() ${super.toString()}"
     }
 }

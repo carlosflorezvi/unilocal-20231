@@ -7,35 +7,40 @@
     android:layout_height="match_parent"
     tools:context=".actividades.MainActivity">
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="#DFDFDF" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#a6eca8" />
 
-        <EditText
-            android:id="@+id/texto_busqueda"
-            android:layout_width="350dp"
-            android:layout_height="50dp"
-            android:hint="@string/txt_busqueda"
-            android:imeOptions="actionSearch"
-            android:singleLine="true"
-            android:background="@drawable/fondo_busqueda"
-            android:layout_centerHorizontal="true"
-            android:paddingStart="20dp"
-            android:paddingEnd="20dp"
-            android:drawableEnd="@drawable/ic_search"
-            android:layout_marginTop="40dp" />
+    <FrameLayout
+        android:id="@+id/contenido_principal"
+        android:layout_width="match_parent"
+        android:background="@color/green"
+        android:layout_height="400dp" />
 
-        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-            android:id="@+id/btn_login"
-            android:layout_width="150dp"
-            android:layout_height="60dp"
-            android:text="@string/txt_btn_login"
-            android:layout_marginEnd="40dp"
-            android:layout_marginBottom="40dp"
-            app:icon="@drawable/ic_done_a"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
-            android:onClick="irALogin"/>
+    <fragment
+        android:id="@+id/barra_superior"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        class="co.edu.eam.unilocal.fragmentos.MenuPrincipalFragment" />
 
-  </RelativeLayout>
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/btn_login"
+        android:layout_width="180dp"
+        android:layout_height="60dp"
+        android:text="@string/btn_nuevo_lugar"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        app:icon="@drawable/ic_done_a"
+        android:layout_above="@id/barra_inferior"
+        android:layout_alignParentRight="true"
+        android:onClick="irALogin"/>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/barra_inferior"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        app:menu="@menu/barra_inferior" />
+
+</RelativeLayout>

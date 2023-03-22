@@ -28,10 +28,5 @@ object Usuarios {
         return lista.firstOrNull { u -> u.id == id }
     }
 
-    fun login(correo:String, password:String):Usuario{
-        val respuesta = lista.first { u -> u.password == password && u.correo == correo }
-        return respuesta
-    }
-
 
 }

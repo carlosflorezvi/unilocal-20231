@@ -14,25 +14,33 @@
         android:theme="@style/Theme.Unilocal"
         tools:targetApi="31">
         <activity
-            android:name=".DetalleLugarActivity"
+            android:name=".actividades.ModeradorActivity"
+            android:exported="true">
+        </activity>
+        <activity
+            android:name=".actividades.ResultadoBusquedaActivity"
+            android:exported="false" />
+        <activity
+            android:name=".actividades.DetalleLugarActivity"
             android:exported="false" />
         <activity
             android:name=".actividades.CrearLugarActivity"
             android:exported="false" />
         <activity
             android:name=".actividades.LoginActivity"
-            android:exported="false" />
+            android:exported="true" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".actividades.RegistroActivity"
             android:exported="false" />
         <activity
             android:name=".actividades.MainActivity"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
     </application>
 

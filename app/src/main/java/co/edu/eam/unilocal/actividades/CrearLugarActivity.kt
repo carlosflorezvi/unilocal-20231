@@ -14,6 +14,7 @@ import co.edu.eam.unilocal.bd.Lugares
 import co.edu.eam.unilocal.databinding.ActivityCrearLugarBinding
 import co.edu.eam.unilocal.modelo.Categoria
 import co.edu.eam.unilocal.modelo.Ciudad
+import co.edu.eam.unilocal.modelo.EstadoLugar
 import co.edu.eam.unilocal.modelo.Lugar
 
 class CrearLugarActivity : AppCompatActivity() {
@@ -75,6 +76,7 @@ class CrearLugarActivity : AppCompatActivity() {
         val nombre = binding.nombreLugar.text.toString()
         val descripcion = binding.descripcionLugar.text.toString()
         val telefono = binding.telefonoLugar.text.toString()
+        val direccion = binding.direccionLugar.text.toString()
         val idCiudad = ciudades[posCiudad].id
         val idCategoria = categorias[posCategoria].id
 
@@ -90,15 +92,21 @@ class CrearLugarActivity : AppCompatActivity() {
             binding.descripcionLayout.error = null
         }
 
+        if( direccion.isEmpty() ){
+            binding.direccionLayout.error = getString(R.string.es_obligatorio)
+        }else{
+            binding.direccionLayout.error = null
+        }
+
         if( telefono.isEmpty() ){
             binding.telefonoLayout.error = getString(R.string.es_obligatorio)
         }else{
             binding.telefonoLayout.error = null
         }
 
-        if(nombre.isNotEmpty() && descripcion.isNotEmpty() && telefono.isNotEmpty() && idCiudad != -1 && idCategoria != -1)  {
+        if(nombre.isNotEmpty() && descripcion.isNotEmpty() && telefono.isNotEmpty() && direccion.isNotEmpty() && idCiudad != -1 && idCategoria != -1)  {
 
-            val nuevoLugar = Lugar(7, nombre, descripcion, 1, false, idCategoria, 0f, 0f, idCiudad)
+            val nuevoLugar = Lugar(7, nombre, descripcion, 1, EstadoLugar.SIN_REVISAR, idCategoria, direccion, 0f, 0f, idCiudad)
 
             val telefonos: ArrayList<String> = ArrayList()
             telefonos.add(telefono)
@@ -106,7 +114,6 @@ class CrearLugarActivity : AppCompatActivity() {
             nuevoLugar.telefonos = telefonos
 
             Lugares.crear(nuevoLugar)
-            Log.e("CrearLugarActivity", Lugares.listarRechazados().toString())
 
         }
 

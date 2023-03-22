@@ -7,8 +7,9 @@ class Lugar(var id:Int,
             var nombre:String,
             var descripcion:String,
             var idCreador:Int,
-            var estado:Boolean,
+            var estado:EstadoLugar,
             var idCategoria:Int,
+            var direccion:String,
             var latitud:Float, var longitud:Float,
             var idCiudad:Int
 ) {
