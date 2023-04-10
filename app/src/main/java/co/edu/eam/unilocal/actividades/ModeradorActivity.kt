@@ -35,6 +35,12 @@ class ModeradorActivity : AppCompatActivity() {
         binding.listaLugares.adapter = adapterLista
         binding.listaLugares.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
 
+        crearEventoSwipe()
+
+    }
+
+    fun crearEventoSwipe(){
+
         val simpleCallback:ItemTouchHelper.SimpleCallback = object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT){
             override fun onMove(
                 recyclerView: RecyclerView,
@@ -117,6 +123,6 @@ class ModeradorActivity : AppCompatActivity() {
         val itemTouchHelper = ItemTouchHelper(simpleCallback)
         itemTouchHelper.attachToRecyclerView(binding.listaLugares)
 
-
     }
+
 }

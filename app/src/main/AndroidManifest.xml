@@ -14,9 +14,11 @@
         android:theme="@style/Theme.Unilocal"
         tools:targetApi="31">
         <activity
+            android:name=".actividades.AdministradorActivity"
+            android:exported="false" />
+        <activity
             android:name=".actividades.ModeradorActivity"
-            android:exported="true">
-        </activity>
+            android:exported="true" />
         <activity
             android:name=".actividades.ResultadoBusquedaActivity"
             android:exported="false" />
@@ -28,9 +30,10 @@
             android:exported="false" />
         <activity
             android:name=".actividades.LoginActivity"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -39,9 +42,7 @@
             android:exported="false" />
         <activity
             android:name=".actividades.MainActivity"
-            android:exported="true">
-
-        </activity>
+            android:exported="true" />
     </application>
 
 </manifest>

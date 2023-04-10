@@ -2,7 +2,7 @@
     <string name="app_name">unilocal</string>
 
     <!-- Textos son de el layout del main -->
-    <string name="txt_busqueda">Nombre del lugar</string>
+    <string name="txt_busqueda">Buscar lugares</string>
     <string name="txt_btn_registro">Ir a registro</string>
     <string name="txt_btn_login">Ir a login</string>
 
@@ -24,13 +24,28 @@
     <string name="btn_crear_lugar">Crear nuevo lugar</string>
     <string name="btn_nuevo_lugar">Nuevo lugar</string>
     <string name="btn_direccion_lugar">Dirección del lugar</string>
+    <string name="lugar_creado">Lugar creado correctamente. En revisión por un moderador.</string>
 
     <!-- Textos de validaciones -->
     <string name="es_obligatorio">Este campo es obligatorio</string>
     <string name="maximo_caracteres">Máximo 10 caracteres</string>
     <string name="datos_correctos">Los datos son correctos</string>
     <string name="datos_incorrectos">Los datos son incorrectos</string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- Textos del menú inferior -->
+    <string name="inicio">Inicio</string>
+    <string name="mis_lugares">Mis Lugares</string>
+    <string name="favoritos">Favoritos</string>
+
+    <!-- Textos del admin -->
+    <string name="pantalla_admin">Pantalla admin</string>
+    <string name="horarios_del_lugar">Horarios del lugar</string>
+
+    <!-- Textos detalle lugar -->
+    <string name="info_lugar">Información del lugar</string>
+    <string name="comentarios">Comentarios</string>
 
 </resources>

@@ -19,7 +19,7 @@ class MenuPrincipalFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         binding = FragmentMenuPrincipalBinding.inflate(inflater, container, false)
 

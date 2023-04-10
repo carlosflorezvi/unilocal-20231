@@ -3,17 +3,17 @@
 
     <item
         android:id="@+id/menu_inicio"
-        android:icon="@drawable/done_icono"
-        android:title="Inicio" />
+        android:icon="@drawable/ic_home"
+        android:title="@string/inicio" />
 
     <item
         android:id="@+id/menu_mis_lugares"
-        android:icon="@drawable/done_icono"
-        android:title="Mis lugares" />
+        android:icon="@drawable/ic_place"
+        android:title="@string/mis_lugares" />
 
     <item
         android:id="@+id/menu_favoritos"
-        android:icon="@drawable/done_icono"
-        android:title="Favoritos" />
+        android:icon="@drawable/ic_star"
+        android:title="@string/favoritos" />
 
 </menu>

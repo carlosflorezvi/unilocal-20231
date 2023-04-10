@@ -3,11 +3,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragmentos.InicioFragment">
+    tools:context=".fragmentos.ComentariosLugarFragment">
 
-    <View
+    <TextView
+        android:id="@+id/lista_comentarios"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#a6eca8" />
+        android:text="@string/hello_blank_fragment" />
 
 </FrameLayout>

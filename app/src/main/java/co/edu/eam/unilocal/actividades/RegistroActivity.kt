@@ -2,18 +2,11 @@ package co.edu.eam.unilocal.actividades
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.view.View
-import android.widget.ImageButton
 import android.widget.Toast
-import android.widget.ToggleButton
 import co.edu.eam.unilocal.R
 import co.edu.eam.unilocal.bd.Usuarios
 import co.edu.eam.unilocal.databinding.ActivityRegistroBinding
 import co.edu.eam.unilocal.modelo.Usuario
-import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.android.material.snackbar.Snackbar
 
 class RegistroActivity : AppCompatActivity() {
 
@@ -24,12 +17,10 @@ class RegistroActivity : AppCompatActivity() {
 
         binding = ActivityRegistroBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
         binding.btnRegistro.setOnClickListener { registrarUsuario() }
-
     }
 
-    fun registrarUsuario(){
+    private fun registrarUsuario(){
 
         val nombre = binding.nombreUsuario.text.toString()
         val nickname = binding.nicknameUsuario.text.toString()
@@ -72,7 +63,6 @@ class RegistroActivity : AppCompatActivity() {
             Usuarios.agregar(usuario)
             Toast.makeText(this, getString(R.string.usuario_creado), Toast.LENGTH_LONG).show()
 
-            Log.e("RegistroActivity", Usuarios.listar().toString())
         }
 
     }

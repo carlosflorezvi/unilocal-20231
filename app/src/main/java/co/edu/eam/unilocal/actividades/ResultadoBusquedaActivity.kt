@@ -2,7 +2,6 @@ package co.edu.eam.unilocal.actividades
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import androidx.recyclerview.widget.LinearLayoutManager
 import co.edu.eam.unilocal.adapter.LugarAdapter
 import co.edu.eam.unilocal.bd.Lugares

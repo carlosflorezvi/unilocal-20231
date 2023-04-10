@@ -4,11 +4,11 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import co.edu.eam.unilocal.R
 import co.edu.eam.unilocal.bd.Personas
 import co.edu.eam.unilocal.databinding.ActivityLoginBinding
+import co.edu.eam.unilocal.modelo.Administrador
 import co.edu.eam.unilocal.modelo.Moderador
 import co.edu.eam.unilocal.modelo.Usuario
 
@@ -25,10 +25,11 @@ class LoginActivity : AppCompatActivity() {
         val tipo = sp.getString("tipo_usuario", "")
 
         if(correo!!.isNotEmpty() && tipo!!.isNotEmpty()){
-            Log.e("LoginActivity", "entro $tipo")
+
             when(tipo){
                 "usuario" -> startActivity(Intent(this, MainActivity::class.java))
                 "moderador" -> startActivity( Intent(this, ModeradorActivity::class.java) )
+                "admin" -> startActivity( Intent(this, AdministradorActivity::class.java) )
             }
 
             finish()
@@ -73,9 +74,10 @@ class LoginActivity : AppCompatActivity() {
 
                 if(persona!=null){
 
-                    val tipo = if( persona is Usuario ) "usuario" else if( persona is Moderador ) "moderador" else "Administrador"
+                    val tipo = if( persona is Usuario ) "usuario" else if( persona is Moderador ) "moderador" else "admin"
 
                     val sharedPreferences = this.getSharedPreferences( "sesion", Context.MODE_PRIVATE ).edit()
+                    sharedPreferences.putInt("codigo_usuario", persona.id)
                     sharedPreferences.putString("correo_usuario", persona.correo)
                     sharedPreferences.putString("tipo_usuario", tipo)
 
@@ -84,6 +86,7 @@ class LoginActivity : AppCompatActivity() {
                     when(persona){
                         is Usuario -> startActivity( Intent(this, MainActivity::class.java) )
                         is Moderador -> startActivity( Intent(this, ModeradorActivity::class.java) )
+                        is Administrador -> startActivity( Intent(this, AdministradorActivity::class.java) )
                     }
                 }else{
                         Toast.makeText(this, getString(R.string.datos_incorrectos), Toast.LENGTH_LONG).show()

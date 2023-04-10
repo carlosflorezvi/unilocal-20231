@@ -106,7 +106,7 @@ class CrearLugarActivity : AppCompatActivity() {
 
         if(nombre.isNotEmpty() && descripcion.isNotEmpty() && telefono.isNotEmpty() && direccion.isNotEmpty() && idCiudad != -1 && idCategoria != -1)  {
 
-            val nuevoLugar = Lugar(7, nombre, descripcion, 1, EstadoLugar.SIN_REVISAR, idCategoria, direccion, 0f, 0f, idCiudad)
+            val nuevoLugar = Lugar(nombre, descripcion, 1, EstadoLugar.SIN_REVISAR, idCategoria, direccion, 0f, 0f, idCiudad)
 
             val telefonos: ArrayList<String> = ArrayList()
             telefonos.add(telefono)
@@ -115,6 +115,7 @@ class CrearLugarActivity : AppCompatActivity() {
 
             Lugares.crear(nuevoLugar)
 
+            Toast.makeText(this, getString(R.string.lugar_creado), Toast.LENGTH_LONG).show()
         }
 
     }

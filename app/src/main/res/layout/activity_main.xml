@@ -7,34 +7,17 @@
     android:layout_height="match_parent"
     tools:context=".actividades.MainActivity">
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#a6eca8" />
-
     <FrameLayout
         android:id="@+id/contenido_principal"
         android:layout_width="match_parent"
-        android:background="@color/green"
-        android:layout_height="400dp" />
+        android:layout_height="match_parent"
+        android:layout_above="@+id/barra_inferior"/>
 
     <fragment
         android:id="@+id/barra_superior"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         class="co.edu.eam.unilocal.fragmentos.MenuPrincipalFragment" />
-
-    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-        android:id="@+id/btn_login"
-        android:layout_width="180dp"
-        android:layout_height="60dp"
-        android:text="@string/btn_nuevo_lugar"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="20dp"
-        app:icon="@drawable/ic_done_a"
-        android:layout_above="@id/barra_inferior"
-        android:layout_alignParentRight="true"
-        android:onClick="irALogin"/>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/barra_inferior"
