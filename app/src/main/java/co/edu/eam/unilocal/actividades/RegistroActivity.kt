@@ -7,6 +7,7 @@ import co.edu.eam.unilocal.R
 import co.edu.eam.unilocal.bd.Usuarios
 import co.edu.eam.unilocal.databinding.ActivityRegistroBinding
 import co.edu.eam.unilocal.modelo.Usuario
+import com.google.android.material.snackbar.Snackbar
 
 class RegistroActivity : AppCompatActivity() {
 
@@ -61,7 +62,7 @@ class RegistroActivity : AppCompatActivity() {
 
             val usuario = Usuario(4, nombre, nickname, email, password)
             Usuarios.agregar(usuario)
-            Toast.makeText(this, getString(R.string.usuario_creado), Toast.LENGTH_LONG).show()
+            Snackbar.make(binding.root, getString(R.string.usuario_creado), Toast.LENGTH_LONG).show()
 
         }
 

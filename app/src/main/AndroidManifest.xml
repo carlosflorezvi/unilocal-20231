@@ -3,6 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="co.edu.eam.unilocal">
 
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -13,6 +16,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Unilocal"
         tools:targetApi="31">
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key" />
+
         <activity
             android:name=".actividades.AdministradorActivity"
             android:exported="false" />
@@ -24,21 +32,23 @@
             android:exported="false" />
         <activity
             android:name=".actividades.DetalleLugarActivity"
+            android:windowSoftInputMode="adjustPan"
             android:exported="false" />
         <activity
             android:name=".actividades.CrearLugarActivity"
+            android:windowSoftInputMode="adjustPan"
             android:exported="false" />
         <activity
             android:name=".actividades.LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
             android:name=".actividades.RegistroActivity"
+            android:windowSoftInputMode="adjustPan"
             android:exported="false" />
         <activity
             android:name=".actividades.MainActivity"

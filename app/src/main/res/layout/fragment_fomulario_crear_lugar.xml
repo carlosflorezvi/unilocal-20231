@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".fragmentos.crearlugar.FormularioCrearLugarFragment">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/paso_1"
+        android:layout_gravity="center"
+        android:layout_marginTop="40dp"
+        android:textColor="@color/black"
+        android:textSize="21sp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="20dp"
+        android:background="@color/gray"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center"
+            tools:context=".actividades.CrearLugarActivity">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/nombre_layout"
+                style="@style/til_form">
+
+                <EditText
+                    android:id="@+id/nombre_lugar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/fondo_forms"
+                    android:hint="@string/txt_nombre_lugar"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/descripcion_layout"
+                style="@style/til_form">
+
+                <EditText
+                    android:id="@+id/descripcion_lugar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"
+                    android:lines="8"
+                    android:background="@drawable/fondo_forms"
+                    android:hint="@string/txt_descripcion_lugar"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/direccion_layout"
+                style="@style/til_form">
+
+                <EditText
+                    android:id="@+id/direccion_lugar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/fondo_forms"
+                    android:hint="@string/btn_direccion_lugar"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Spinner
+                android:id="@+id/ciudad_lugar"
+                style="@style/spinner_form"
+                />
+
+            <Spinner
+                android:id="@+id/categoria_lugar"
+                style="@style/spinner_form" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/telefono_layout"
+                style="@style/til_form">
+
+                <EditText
+                    android:id="@+id/telefono_lugar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="phone"
+                    android:background="@drawable/fondo_forms"
+                    android:hint="@string/txt_telefono_lugar"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

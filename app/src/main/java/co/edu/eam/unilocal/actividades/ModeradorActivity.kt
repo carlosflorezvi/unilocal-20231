@@ -63,8 +63,8 @@ class ModeradorActivity : AppCompatActivity() {
                         listaLugares.remove(lugar)
                         adapterLista.notifyItemRemoved(pos)
 
-                        Snackbar.make(binding.listaLugares, "Lugar aceptado!", Snackbar.LENGTH_LONG)
-                            .setAction("Deshacer", View.OnClickListener {
+                        Snackbar.make(binding.listaLugares, getString(R.string.lugar_aceptado), Snackbar.LENGTH_LONG)
+                            .setAction(getString(R.string.deshacer), View.OnClickListener {
                                 Lugares.cambiarEstado( codigoLugar, EstadoLugar.SIN_REVISAR )
                                 listaLugares.add(pos, lugar!!)
                                 adapterLista.notifyItemInserted(pos)
@@ -76,8 +76,8 @@ class ModeradorActivity : AppCompatActivity() {
                         listaLugares.remove(lugar)
                         adapterLista.notifyItemRemoved(pos)
 
-                        Snackbar.make(binding.listaLugares, "Lugar rechazado!", Snackbar.LENGTH_LONG)
-                            .setAction("Deshacer", View.OnClickListener {
+                        Snackbar.make(binding.listaLugares, getString(R.string.lugar_rechazado), Snackbar.LENGTH_LONG)
+                            .setAction(getString(R.string.deshacer), View.OnClickListener {
                                 Lugares.cambiarEstado( codigoLugar, EstadoLugar.SIN_REVISAR )
                                 listaLugares.add(pos, lugar!!)
                                 adapterLista.notifyItemInserted(pos)
@@ -110,8 +110,8 @@ class ModeradorActivity : AppCompatActivity() {
                 RecyclerViewSwipeDecorator.Builder(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
                     .addSwipeLeftBackgroundColor( ContextCompat.getColor(baseContext, R.color.green) )
                     .addSwipeRightBackgroundColor( ContextCompat.getColor(baseContext, R.color.red) )
-                    .addSwipeLeftLabel("Aceptar")
-                    .addSwipeRightLabel("Rechazar")
+                    .addSwipeLeftLabel(getString(R.string.aceptar))
+                    .addSwipeRightLabel(getString(R.string.rechazar))
                     .create()
                     .decorate()
 

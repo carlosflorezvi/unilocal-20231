@@ -2,11 +2,25 @@
 <resources >
 
     <style name="til_form">
-        <item name="android:layout_width">350dp</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_marginEnd">35dp</item>
+        <item name="android:layout_marginStart">35dp</item>
         <item name="boxStrokeWidth">0dp</item>
         <item name="boxStrokeWidthFocused">0dp</item>
         <item name="android:layout_marginBottom">10dp</item>
         <item name="android:layout_height">wrap_content</item>
     </style>
+
+    <style name="spinner_form">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">55dp</item>
+        <item name="android:layout_marginEnd">35dp</item>
+        <item name="android:layout_marginStart">35dp</item>
+        <item name="android:background">@drawable/form_spinner</item>
+        <item name="android:paddingStart">10dp</item>
+        <item name="android:layout_marginBottom">10dp</item>
+    </style>
+
+    <style name="DialogoTitulo" parent="ThemeOverlay.AppCompat.Dialog.Alert"></style>
 
 </resources>

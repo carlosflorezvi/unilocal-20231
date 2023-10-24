@@ -1,0 +1,87 @@
+<resources>
+    <string name="app_name">unilocal</string>
+
+    <!-- Textos son de el layout del main -->
+    <string name="txt_busqueda">Search places</string>
+    <string name="txt_btn_registro">Go to register</string>
+    <string name="txt_btn_login">Go to login</string>
+
+    <!-- Textos son de el layout del login -->
+    <string name="txt_email">Type your email</string>
+    <string name="txt_password">Type your password</string>
+    <string name="txt_login">Login</string>
+    <string name="txt_registro">Register now</string>
+
+    <!-- Textos del registro -->
+    <string name="txt_nombre">Type your name</string>
+    <string name="txt_nickname">Type your nickname</string>
+    <string name="usuario_creado">Usuario registrado correctamente</string>
+
+    <!-- Textos de crear lugar -->
+    <string name="txt_nombre_lugar">Nombre del lugar</string>
+    <string name="txt_descripcion_lugar">Descripción del lugar</string>
+    <string name="txt_telefono_lugar">Teléfono del lugar</string>
+    <string name="btn_crear_lugar">Crear nuevo lugar</string>
+    <string name="btn_nuevo_lugar">Nuevo lugar</string>
+    <string name="btn_direccion_lugar">Dirección del lugar</string>
+    <string name="lugar_creado">Lugar creado correctamente. En revisión por un moderador</string>
+    <string name="mensaje_mapa">Es necesario seleccionar una ubicación en el mapa</string>
+    <string name="paso_3">Paso 3/3: Elegir ubicación</string>
+    <string name="paso_1">Paso 1/3: Información básica</string>
+    <string name="paso_2">Paso 2/3: Selección de horarios</string>
+    <string name="horario_validacion">Es necesario asignar al menos un horario</string>
+
+    <!-- Textos de validaciones -->
+    <string name="es_obligatorio">Este campo es obligatorio</string>
+    <string name="maximo_caracteres">Máximo 10 caracteres</string>
+    <string name="datos_correctos">Los datos son correctos</string>
+    <string name="datos_incorrectos">Los datos son incorrectos</string>
+
+    <!-- Textos del menú inferior -->
+    <string name="inicio">Home</string>
+    <string name="mis_lugares">My places</string>
+    <string name="favoritos">Favorites</string>
+
+    <!-- Textos del admin -->
+    <string name="pantalla_admin">Pantalla admin</string>
+    <string name="horarios_del_lugar">Horarios del lugar</string>
+
+    <!-- Textos detalle lugar -->
+    <string name="info_lugar">Información del lugar</string>
+    <string name="comentarios">Comentarios</string>
+    <string name="escribir_comentario">Escribir comentario</string>
+    <string name="comentar">Comentar</string>
+    <string name="sin_comentarios">Aún no hay comentarios</string>
+    <string name="comentario_realizado">Se ha enviado el comentario</string>
+    <string name="comentario_error">Debe escribir el comentario y seleccionar las estrellas</string>
+    <string name="abierto">Open</string>
+    <string name="cerrado">Close</string>
+
+    <!-- Textos moderador -->
+    <string name="deshacer">Undo</string>
+    <string name="lugar_aceptado">¡Lugar aceptado!</string>
+    <string name="lugar_rechazado">¡Lugar rechazado!</string>
+    <string name="aceptar">Aceptar</string>
+    <string name="rechazar">Rechazar</string>
+    <string name="lugares_rechazados">lugares rechazados</string>
+    <string name="perfil">Perfil</string>
+    <string name="cerrar_sesion">Cerrar sesión</string>
+    <string name="mas_opciones">Más opciones</string>
+
+    <!-- Textos navigation view -->
+    <string name="abrir">Open</string>
+    <string name="cerrar">Close</string>
+    <string name="cambiar_idioma">Change language</string>
+
+    <!-- Textos Horarios -->
+    <string name="agregar_horario">Añadir horario</string>
+    <string name="hora_cierre">Hora cierre</string>
+    <string name="hora_inicio">Hora inicio</string>
+    <string name="horario_del_lugar">Horario del lugar</string>
+    <string name="lista_de_horario">Lista de horario</string>
+
+    <!-- Validaciones -->
+    <string name="sin_registros">Aún no hay registros</string>
+    <string name="todos_obligatorios">Todos los campos son obligatorios</string>
+
+</resources>

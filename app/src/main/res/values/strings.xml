@@ -25,15 +25,17 @@
     <string name="btn_nuevo_lugar">Nuevo lugar</string>
     <string name="btn_direccion_lugar">Dirección del lugar</string>
     <string name="lugar_creado">Lugar creado correctamente. En revisión por un moderador.</string>
+    <string name="mensaje_mapa">Es necesario seleccionar una ubicación en el mapa</string>
+    <string name="paso_3">Paso 3/3: Elegir ubicación</string>
+    <string name="paso_1">Paso 1/3: Información básica</string>
+    <string name="paso_2">Paso 2/3: Selección de horarios</string>
+    <string name="horario_validacion">Es necesario asignar al menos un horario</string>
 
     <!-- Textos de validaciones -->
     <string name="es_obligatorio">Este campo es obligatorio</string>
     <string name="maximo_caracteres">Máximo 10 caracteres</string>
     <string name="datos_correctos">Los datos son correctos</string>
     <string name="datos_incorrectos">Los datos son incorrectos</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <!-- Textos del menú inferior -->
     <string name="inicio">Inicio</string>
@@ -47,5 +49,40 @@
     <!-- Textos detalle lugar -->
     <string name="info_lugar">Información del lugar</string>
     <string name="comentarios">Comentarios</string>
+    <string name="escribir_comentario">Escribir comentario</string>
+    <string name="comentar">Comentar</string>
+    <string name="sin_comentarios">Aún no hay comentarios</string>
+    <string name="comentario_realizado">Se ha enviado el comentario</string>
+    <string name="comentario_error">Debe escribir el comentario y seleccionar las estrellas</string>
+    <string name="abierto">Abierto</string>
+    <string name="cerrado">Cerrado</string>
+
+    <!-- Textos moderador -->
+    <string name="deshacer">Deshacer</string>
+    <string name="lugar_aceptado">¡Lugar aceptado!</string>
+    <string name="lugar_rechazado">¡Lugar rechazado!</string>
+    <string name="aceptar">Aceptar</string>
+    <string name="rechazar">Rechazar</string>
+    <string name="lugares_rechazados">lugares rechazados</string>
+    <string name="perfil">Perfil</string>
+    <string name="cerrar_sesion">Cerrar sesión</string>
+    <string name="mas_opciones">Más opciones</string>
+
+    <!-- Textos navigation view -->
+    <string name="abrir">Abrir</string>
+    <string name="cerrar">Cerrar</string>
+    <string name="cambiar_idioma">Cambiar idioma</string>
+
+    <!-- Textos Horarios -->
+    <string name="agregar_horario">Añadir horario</string>
+    <string name="hora_cierre">Hora cierre</string>
+    <string name="hora_inicio">Hora inicio</string>
+    <string name="horario_del_lugar">Horario del lugar</string>
+    <string name="lista_de_horario">Lista de horario</string>
+
+    <!-- Validaciones -->
+    <string name="sin_registros">Aún no hay registros</string>
+    <string name="todos_obligatorios">Todos los campos son obligatorios</string>
+
 
 </resources>

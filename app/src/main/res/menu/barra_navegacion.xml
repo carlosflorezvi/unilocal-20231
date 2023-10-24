@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/menu_lugares_rechazados"
+            android:icon="@drawable/ic_rechazado"
+            android:title="@string/lugares_rechazados" />
+        <item
+            android:id="@+id/menu_perfil"
+            android:icon="@drawable/ic_perfil"
+            android:title="@string/perfil" />
+
+    </group>
+
+    <item
+        android:id="@+id/navigation_subheader"
+        android:title="@string/mas_opciones">
+        <menu>
+            <item
+                android:id="@+id/menu_cambiar_idioma"
+                android:title="@string/cambiar_idioma" />
+            <item
+                android:id="@+id/menu_cerrar_sesion"
+                android:title="@string/cerrar_sesion" />
+        </menu>
+    </item>
+
+
+</menu>

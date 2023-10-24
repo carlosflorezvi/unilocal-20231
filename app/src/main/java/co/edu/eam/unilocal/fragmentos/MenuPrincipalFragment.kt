@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import androidx.fragment.app.Fragment
 import co.edu.eam.unilocal.R
+import co.edu.eam.unilocal.actividades.MainActivity
 import co.edu.eam.unilocal.actividades.ResultadoBusquedaActivity
 import co.edu.eam.unilocal.databinding.FragmentMenuPrincipalBinding
 
@@ -38,7 +39,14 @@ class MenuPrincipalFragment : Fragment() {
             true
         }
 
+        binding.btnMenu.setOnClickListener {
+            (requireActivity() as MainActivity).mostrarBarraNavegacion()
+        }
+
         return binding.root
     }
+
+
+
 
 }

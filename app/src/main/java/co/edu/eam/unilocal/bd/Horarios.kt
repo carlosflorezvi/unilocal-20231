@@ -32,4 +32,10 @@ object Horarios {
         return todosDias
     }
 
+    fun agregarHorario(horario:Horario):Horario{
+        horario.id = lista.size + 1
+        lista.add( horario )
+        return horario
+    }
+
 }

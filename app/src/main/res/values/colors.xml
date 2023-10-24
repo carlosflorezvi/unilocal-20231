@@ -12,4 +12,6 @@
     <color name="gray_3">#EDEDED</color>
     <color name="red">#FF0000</color>
     <color name="green">#00FF00</color>
+    <color name="yellow">#E5BE01</color>
+    <color name="vinotinto">#DC143C</color>
 </resources>

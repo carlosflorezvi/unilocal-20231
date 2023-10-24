@@ -21,7 +21,9 @@ object Comentarios {
         return lista.filter { c -> c.idLugar == idLugar }.toCollection(ArrayList())
     }
 
-    fun crear(comentario: Comentario){
+    fun crear(comentario: Comentario):Comentario{
+        comentario.id = lista.size+1
         lista.add( comentario )
+        return comentario
     }
 }

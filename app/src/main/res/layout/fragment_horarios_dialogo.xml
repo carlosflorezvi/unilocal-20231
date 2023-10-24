@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    tools:context=".fragmentos.crearlugar.HorariosDialogoFragment">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="25sp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:layout_gravity="center"
+        android:text="@string/horario_del_lugar" />
+
+    <com.google.android.material.chip.ChipGroup
+        android:id="@+id/lista_dias"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="35dp"
+        android:layout_marginStart="35dp"
+        android:layout_marginBottom="20dp"/>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/hora_inicio_layout"
+        style="@style/til_form">
+
+        <EditText
+            android:id="@+id/hora_inicio"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="time"
+            android:background="@drawable/fondo_forms"
+            android:hint="@string/hora_inicio"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/hora_cierre_layout"
+        style="@style/til_form">
+
+        <EditText
+            android:id="@+id/hora_cierre"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="time"
+            android:background="@drawable/fondo_forms"
+            android:hint="@string/hora_cierre"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:id="@+id/agregar_horario"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="20dp"
+        android:text="@string/agregar_horario" />
+
+
+</LinearLayout>

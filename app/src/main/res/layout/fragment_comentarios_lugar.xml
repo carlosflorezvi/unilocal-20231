@@ -1,14 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragmentos.ComentariosLugarFragment">
+    android:orientation="vertical"
+    android:paddingLeft="20dp"
+    android:paddingRight="20dp"
+    tools:context=".fragmentos.detallelugar.ComentariosLugarFragment">
 
-    <TextView
-        android:id="@+id/lista_comentarios"
+    <LinearLayout
+        android:id="@+id/form_comentario"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content"
+        android:paddingTop="20dp"
+        android:orientation="vertical">
 
-</FrameLayout>
+        <EditText
+            android:id="@+id/mensaje_comentario"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:lines="4"
+            android:inputType="textMultiLine"
+            android:gravity="top|left"
+            android:padding="15dp"
+            android:textSize="14sp"
+            android:background="@drawable/fondo_forms"
+            android:hint="@string/escribir_comentario"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
+
+            <include android:id="@+id/estrellas" layout="@layout/estrellas" />
+
+            <Button
+                android:id="@+id/comentar_lugar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:text="@string/comentar" />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <View
+        android:id="@+id/divisor"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:background="@color/gray"/>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/lista_comentarios"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+        <TextView
+            android:id="@+id/txt_sin_comentarios"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:visibility="gone"
+            android:text="@string/sin_comentarios"/>
+
+    </FrameLayout>
+
+</LinearLayout>

@@ -3,12 +3,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/teal_700"
     tools:context=".fragmentos.FavoritosFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/lista_favoritos"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:layout_marginTop="100dp"/>
+
+    <TextView
+        android:id="@+id/txt_vacio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:visibility="gone"
+        android:text="@string/sin_registros"/>
 
 </FrameLayout>

@@ -19,6 +19,8 @@ class MisLugaresFragment : Fragment() {
 
     lateinit var binding: FragmentMisLugaresBinding
     var lista:ArrayList<Lugar> = ArrayList()
+    var codigoUsuario:Int = 0
+    lateinit var adapter:LugarAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -30,18 +32,32 @@ class MisLugaresFragment : Fragment() {
         binding.btnNuevoLugar.setOnClickListener { irACrearLugar() }
 
         val sp = requireActivity().getSharedPreferences("sesion", Context.MODE_PRIVATE)
-        val codigoUsuario = sp.getInt("codigo_usuario", -1)
+        codigoUsuario = sp.getInt("codigo_usuario", -1)
 
         if( codigoUsuario != -1 ){
-            lista = Lugares.listarPorPropietario(codigoUsuario)
+            lista = ArrayList()
 
-            val adapter = LugarAdapter(lista)
+            adapter = LugarAdapter(lista)
             binding.listaMisLugares.adapter = adapter
             binding.listaMisLugares.layoutManager = LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false)
         }
 
 
         return binding.root
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        var misLugares = Lugares.listarPorPropietario(codigoUsuario)
+        lista.clear()
+
+        if(misLugares.isNotEmpty()){
+            lista.addAll(misLugares)
+        }
+
+        adapter.notifyDataSetChanged()
+
     }
 
     private fun irACrearLugar(){
