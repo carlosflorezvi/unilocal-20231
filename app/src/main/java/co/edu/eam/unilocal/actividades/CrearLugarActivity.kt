@@ -1,23 +1,19 @@
 package co.edu.eam.unilocal.actividades
 
-import android.content.Context
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import androidx.core.view.get
-import androidx.fragment.app.Fragment
 import co.edu.eam.unilocal.R
 import co.edu.eam.unilocal.adapter.CrearLugarAdapter
-import co.edu.eam.unilocal.bd.Lugares
 import co.edu.eam.unilocal.databinding.ActivityCrearLugarBinding
 import co.edu.eam.unilocal.fragmentos.crearlugar.FormularioCrearLugarFragment
 import co.edu.eam.unilocal.fragmentos.crearlugar.HorariosCrearLugarFragment
 import co.edu.eam.unilocal.fragmentos.crearlugar.MapaCrearLugarFragment
-import co.edu.eam.unilocal.modelo.EstadoLugar
 import co.edu.eam.unilocal.modelo.Lugar
 import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 
 class CrearLugarActivity : AppCompatActivity(){
 
@@ -33,10 +29,7 @@ class CrearLugarActivity : AppCompatActivity(){
 
         lugar = Lugar()
 
-        val sh = getSharedPreferences("sesion", Context.MODE_PRIVATE)
-        val codigoUsuario = sh.getInt("codigo_usuario", 0)
-
-        binding.itemsForm.adapter = CrearLugarAdapter(this, codigoUsuario)
+        binding.itemsForm.adapter = CrearLugarAdapter(this)
         binding.itemsForm.isUserInputEnabled = false
 
         binding.btnSgte.setOnClickListener { pasarSiguienteFormulario() }
@@ -80,12 +73,22 @@ class CrearLugarActivity : AppCompatActivity(){
             }else{
                 lugar!!.posicion = posicion
 
-                Lugares.crear(lugar!!)
-                Snackbar.make(binding.root, getString(R.string.lugar_creado), Snackbar.LENGTH_LONG).show()
+                Firebase.firestore
+                    .collection("lugares")
+                    .add( lugar!! )
+                    .addOnSuccessListener {
+                        Snackbar.make(binding.root, getString(R.string.lugar_creado), Snackbar.LENGTH_LONG).show()
 
-                Handler(Looper.getMainLooper()).postDelayed({
-                    finish()
-                }, 4000)
+                        Handler(Looper.getMainLooper()).postDelayed({
+                            finish()
+                        }, 4000)
+
+                    }
+                    .addOnFailureListener{
+                        Snackbar.make(binding.root, "${it.message}", Snackbar.LENGTH_LONG).show()
+                    }
+
+
             }
 
         }

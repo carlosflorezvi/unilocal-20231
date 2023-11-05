@@ -2,6 +2,7 @@ package co.edu.eam.unilocal.fragmentos.detallelugar
 
 import android.graphics.Typeface
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,34 +12,31 @@ import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.get
 import androidx.fragment.app.Fragment
 import co.edu.eam.unilocal.R
-import co.edu.eam.unilocal.bd.Categorias
-import co.edu.eam.unilocal.bd.Comentarios
-import co.edu.eam.unilocal.bd.Lugares
-import co.edu.eam.unilocal.bd.Usuarios
 import co.edu.eam.unilocal.databinding.FragmentInfoLugarBinding
-import co.edu.eam.unilocal.modelo.Lugar
-import co.edu.eam.unilocal.modelo.Usuario
+import co.edu.eam.unilocal.modelo.*
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
+import java.util.*
+import kotlin.collections.HashMap
 
 class InfoLugarFragment : Fragment() {
 
     lateinit var binding:FragmentInfoLugarBinding
-    private var lugar: Lugar? = null
-    private var codigoLugar:Int = 0
-    private var codigoUsuario:Int = 0
+    private var codigoLugar:String = ""
     private var esFavorito = false
     private var typefaceSolid:Typeface? = null
     private var typefaceRegular:Typeface? = null
-    private lateinit var usuario:Usuario
+    private var user:FirebaseUser? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        if(arguments != null){
-            codigoLugar = requireArguments().getInt("id_lugar")
-            codigoUsuario = requireArguments().getInt("id_usuario")
+        user = FirebaseAuth.getInstance().currentUser
 
-            usuario = Usuarios.obtener(codigoUsuario)!!
-            esFavorito = usuario.esFavorito(codigoLugar)
+        if(arguments != null){
+            codigoLugar = requireArguments().getString("id_lugar", "")
         }
 
         typefaceSolid = ResourcesCompat.getFont(requireContext(), R.font.font_awesome_6_free_solid_900)
@@ -54,20 +52,45 @@ class InfoLugarFragment : Fragment() {
 
         binding = FragmentInfoLugarBinding.inflate(inflater, container, false)
 
-        lugar = Lugares.obtener(codigoLugar)
+        Firebase.firestore
+            .collection("lugares")
+            .document(codigoLugar)
+            .get()
+            .addOnSuccessListener {
+                var lugarF = it.toObject(Lugar::class.java)
 
-        if(lugar != null) {
-            cargarInformacion(lugar!!)
-            dibujarEstrellas(lugar!!)
+                if(lugarF != null){
+                    lugarF.key = it.id
 
-            binding.btnFavorito.setOnClickListener { marcarFavorito(esFavorito) }
+                    cargarInformacion(lugarF)
+                    dibujarEstrellas()
 
-            if(esFavorito){
-                binding.btnFavorito.typeface = typefaceSolid
-                binding.btnFavorito.text = '\uf004'.toString()
+                }
+
+            }
+            .addOnFailureListener{
+                Log.e("DETALLE_LUGAR", "${it.message}")
             }
 
+        user?.let {
+            Firebase.firestore
+                .collection("usuarios")
+                .document(it.uid)
+                .collection("favoritos")
+                .document(codigoLugar)
+                .get()
+                .addOnSuccessListener { l ->
+
+                    if(l.exists()){
+                        esFavorito = true
+                        binding.btnFavorito.typeface = typefaceSolid
+                        binding.btnFavorito.text = '\uf004'.toString()
+                    }
+
+                }
         }
+
+        binding.btnFavorito.setOnClickListener { marcarFavorito(esFavorito) }
 
         return binding.root
     }
@@ -77,7 +100,16 @@ class InfoLugarFragment : Fragment() {
         binding.nombreLugar.text = lugar.nombre
         binding.descripcionLugar.text = lugar.descripcion
         binding.direccionLugar.text = lugar.direccion
-        binding.iconoCategoria.text = Categorias.obtener(lugar.idCategoria)!!.icono
+
+        Firebase.firestore
+            .collection("categorias")
+            .whereEqualTo("id", lugar.idCategoria)
+            .get()
+            .addOnSuccessListener {
+                for(doc in it){
+                    binding.iconoCategoria.text = doc.toObject(Categoria::class.java).icono
+                }
+            }
 
         var telefonos = ""
 
@@ -104,38 +136,75 @@ class InfoLugarFragment : Fragment() {
 
     }
 
-    fun dibujarEstrellas(lugar:Lugar){
+    fun dibujarEstrellas(){
 
-        val calificacion = lugar.obtenerCalificacionPromedio( Comentarios.listar(lugar.id) )
+        Firebase.firestore
+            .collection("lugares")
+            .document(codigoLugar)
+            .collection("comentarios")
+            .get()
+            .addOnSuccessListener {
+                if(!it.isEmpty) {
+                    var sumaCalificacion = 0
 
-        for( i in 0..calificacion ){
-            (binding.estrellas.lista[i] as TextView).setTextColor( ContextCompat.getColor(requireContext(), R.color.yellow) )
-        }
+                    for (doc in it) {
+                        val com = doc.toObject(Comentario::class.java)
+                        sumaCalificacion += com.calificacion
+                    }
+
+                    var calificacion = sumaCalificacion/it.size()
+
+                    for (i in 0..calificacion) {
+                        (binding.estrellas.lista[i] as TextView).setTextColor(
+                            ContextCompat.getColor(
+                                requireContext(),
+                                R.color.yellow
+                            )
+                        )
+                    }
+                }
+            }
 
     }
 
     fun marcarFavorito(valor:Boolean){
 
+        val fecha = HashMap<String, Date>()
+        fecha.put("fecha", Date())
+
         if(!valor){
             esFavorito = true
             binding.btnFavorito.typeface = typefaceSolid
             binding.btnFavorito.text = '\uf004'.toString()
-            usuario.favoritos.add( codigoLugar )
+
+            Firebase.firestore
+                .collection("usuarios")
+                .document(user!!.uid)
+                .collection("favoritos")
+                .document(codigoLugar)
+                .set( fecha )
+
         }else{
             esFavorito = false
             binding.btnFavorito.typeface = typefaceRegular
             binding.btnFavorito.text = '\uf004'.toString()
-            usuario.favoritos.remove( codigoLugar )
+
+            Firebase.firestore
+                .collection("usuarios")
+                .document(user!!.uid)
+                .collection("favoritos")
+                .document(codigoLugar)
+                .delete()
+
         }
 
     }
 
     companion object{
 
-        fun newInstance(codigoLugar:Int, codigoUsuario:Int): InfoLugarFragment {
+        fun newInstance(codigoLugar:String): InfoLugarFragment {
             val args = Bundle()
-            args.putInt("id_lugar", codigoLugar)
-            args.putInt("id_usuario", codigoUsuario)
+            args.putString("id_lugar", codigoLugar)
 
             val fragmento = InfoLugarFragment()
             fragmento.arguments = args

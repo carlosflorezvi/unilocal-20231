@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import co.edu.eam.unilocal.adapter.LugarAdapter
-import co.edu.eam.unilocal.bd.Lugares
 import co.edu.eam.unilocal.databinding.ActivityResultadoBusquedaBinding
 import co.edu.eam.unilocal.modelo.Lugar
 
@@ -24,7 +23,7 @@ class ResultadoBusquedaActivity : AppCompatActivity() {
         listaLugares = ArrayList()
 
         if(textoBusqueda.isNotEmpty()){
-            listaLugares = Lugares.buscarNombre(textoBusqueda)
+           // listaLugares = Lugares.buscarNombre(textoBusqueda)
         }
 
         val adapter = LugarAdapter(listaLugares)

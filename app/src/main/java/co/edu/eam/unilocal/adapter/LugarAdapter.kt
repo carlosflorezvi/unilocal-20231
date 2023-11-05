@@ -10,11 +10,12 @@ import androidx.core.view.get
 import androidx.recyclerview.widget.RecyclerView
 import co.edu.eam.unilocal.R
 import co.edu.eam.unilocal.actividades.DetalleLugarActivity
-import co.edu.eam.unilocal.bd.Categorias
-import co.edu.eam.unilocal.bd.Comentarios
 import co.edu.eam.unilocal.databinding.ItemLugarBinding
+import co.edu.eam.unilocal.modelo.Categoria
 import co.edu.eam.unilocal.modelo.EstadoLugar
 import co.edu.eam.unilocal.modelo.Lugar
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 
 
 class LugarAdapter(private var lista:ArrayList<Lugar>): RecyclerView.Adapter<LugarAdapter.ViewHolder>() {
@@ -32,7 +33,7 @@ class LugarAdapter(private var lista:ArrayList<Lugar>): RecyclerView.Adapter<Lug
 
     inner class ViewHolder(private var view:ItemLugarBinding):RecyclerView.ViewHolder(view.root), View.OnClickListener{
 
-        private var codigoLugar:Int = 0
+        private var codigoLugar:String = ""
         private lateinit var estadoLugar:EstadoLugar
 
         init {
@@ -61,15 +62,25 @@ class LugarAdapter(private var lista:ArrayList<Lugar>): RecyclerView.Adapter<Lug
                 view.horarioLugar.text = "Abre el ${lugar.obtenerHoraApertura()}"
             }
 
-            val calificacion = lugar.obtenerCalificacionPromedio( Comentarios.listar(lugar.id) )
+            val calificacion = 0 //lugar.obtenerCalificacionPromedio( ArrayList() )
 
             for( i in 0..calificacion ){
                 (view.listaEstrellas[i] as TextView).setTextColor( ContextCompat.getColor(view.listaEstrellas.context, R.color.yellow) )
             }
 
             view.estadoLugar.text = if(estaAbierto){ view.estadoLugar.context.getString(R.string.abierto) }else{ view.estadoLugar.context.getString(R.string.cerrado) }
-            view.iconoLugar.text = Categorias.obtener(lugar.idCategoria)!!.icono
-            codigoLugar = lugar.id
+
+            Firebase.firestore
+                .collection("categorias")
+                .whereEqualTo("id", lugar.idCategoria)
+                .get()
+                .addOnSuccessListener {
+                    for(doc in it){
+                        view.iconoLugar.text = doc.toObject(Categoria::class.java).icono
+                    }
+                }
+
+            codigoLugar = lugar.key
         }
 
         override fun onClick(p0: View?) {

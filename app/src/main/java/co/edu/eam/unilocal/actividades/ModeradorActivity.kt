@@ -1,27 +1,18 @@
 package co.edu.eam.unilocal.actividades
 
-import android.graphics.Canvas
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Context
 import android.os.Bundle
-import android.view.View
-import androidx.core.content.ContextCompat
-import androidx.recyclerview.widget.ItemTouchHelper
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import co.edu.eam.unilocal.adapter.LugarAdapter
-import co.edu.eam.unilocal.bd.Lugares
+import android.widget.RelativeLayout.LayoutParams
+import androidx.appcompat.app.AppCompatActivity
+import co.edu.eam.unilocal.adapter.ListasAdapter
 import co.edu.eam.unilocal.databinding.ActivityModeradorBinding
 import co.edu.eam.unilocal.modelo.EstadoLugar
-import co.edu.eam.unilocal.modelo.Lugar
-import com.google.android.material.snackbar.Snackbar
-import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator
-import co.edu.eam.unilocal.R
+import com.google.android.material.tabs.TabLayoutMediator
+import com.google.firebase.auth.FirebaseAuth
 
 class ModeradorActivity : AppCompatActivity() {
 
     lateinit var binding:ActivityModeradorBinding
-    lateinit var listaLugares:ArrayList<Lugar>
-    lateinit var adapterLista:LugarAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,100 +20,38 @@ class ModeradorActivity : AppCompatActivity() {
         binding = ActivityModeradorBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        listaLugares = Lugares.listarPorEstado(EstadoLugar.SIN_REVISAR)
+        val params = LayoutParams(
+            LayoutParams.MATCH_PARENT,
+            LayoutParams.WRAP_CONTENT
+        )
+        params.setMargins(0, getStatusBarHeight(), 0, 0)
+        binding.tabs.layoutParams = params
 
-        adapterLista = LugarAdapter( listaLugares )
-        binding.listaLugares.adapter = adapterLista
-        binding.listaLugares.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        var user = FirebaseAuth.getInstance().currentUser
 
-        crearEventoSwipe()
+        if(user!=null) {
 
-    }
-
-    fun crearEventoSwipe(){
-
-        val simpleCallback:ItemTouchHelper.SimpleCallback = object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT){
-            override fun onMove(
-                recyclerView: RecyclerView,
-                viewHolder: RecyclerView.ViewHolder,
-                target: RecyclerView.ViewHolder
-            ): Boolean {
-                return false
-            }
-
-            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                var pos = viewHolder.adapterPosition
-                val codigoLugar = listaLugares[pos].id
-                val lugar = Lugares.obtener(codigoLugar)
-
-                when(direction){
-
-                    ItemTouchHelper.LEFT -> {
-
-                        Lugares.cambiarEstado( codigoLugar, EstadoLugar.ACEPTADO )
-                        listaLugares.remove(lugar)
-                        adapterLista.notifyItemRemoved(pos)
-
-                        Snackbar.make(binding.listaLugares, getString(R.string.lugar_aceptado), Snackbar.LENGTH_LONG)
-                            .setAction(getString(R.string.deshacer), View.OnClickListener {
-                                Lugares.cambiarEstado( codigoLugar, EstadoLugar.SIN_REVISAR )
-                                listaLugares.add(pos, lugar!!)
-                                adapterLista.notifyItemInserted(pos)
-                            }).show()
-                    }
-                    ItemTouchHelper.RIGHT -> {
-
-                        Lugares.cambiarEstado( codigoLugar, EstadoLugar.RECHAZADO )
-                        listaLugares.remove(lugar)
-                        adapterLista.notifyItemRemoved(pos)
-
-                        Snackbar.make(binding.listaLugares, getString(R.string.lugar_rechazado), Snackbar.LENGTH_LONG)
-                            .setAction(getString(R.string.deshacer), View.OnClickListener {
-                                Lugares.cambiarEstado( codigoLugar, EstadoLugar.SIN_REVISAR )
-                                listaLugares.add(pos, lugar!!)
-                                adapterLista.notifyItemInserted(pos)
-                            }).show()
-                    }
-
+            binding.viewPager.adapter = ListasAdapter(this)
+            TabLayoutMediator(binding.tabs, binding.viewPager) { tab, pos ->
+                when (pos) {
+                    0 -> tab.text = EstadoLugar.SIN_REVISAR.name
+                    1 -> tab.text = EstadoLugar.RECHAZADO.name
+                    2 -> tab.text = EstadoLugar.ACEPTADO.name
                 }
-
-            }
-
-            override fun onChildDraw(
-                c: Canvas,
-                recyclerView: RecyclerView,
-                viewHolder: RecyclerView.ViewHolder,
-                dX: Float,
-                dY: Float,
-                actionState: Int,
-                isCurrentlyActive: Boolean
-            ) {
-                super.onChildDraw(
-                    c,
-                    recyclerView,
-                    viewHolder,
-                    dX,
-                    dY,
-                    actionState,
-                    isCurrentlyActive
-                )
-
-                RecyclerViewSwipeDecorator.Builder(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
-                    .addSwipeLeftBackgroundColor( ContextCompat.getColor(baseContext, R.color.green) )
-                    .addSwipeRightBackgroundColor( ContextCompat.getColor(baseContext, R.color.red) )
-                    .addSwipeLeftLabel(getString(R.string.aceptar))
-                    .addSwipeRightLabel(getString(R.string.rechazar))
-                    .create()
-                    .decorate()
-
-
-            }
+            }.attach()
 
         }
 
-        val itemTouchHelper = ItemTouchHelper(simpleCallback)
-        itemTouchHelper.attachToRecyclerView(binding.listaLugares)
-
     }
+
+    private fun getStatusBarHeight(): Int {
+        var result = 0
+        val resourceId = resources.getIdentifier("status_bar_height", "dimen", "android")
+        if (resourceId > 0) {
+            result = resources.getDimensionPixelSize(resourceId)
+        }
+        return result
+    }
+
 
 }

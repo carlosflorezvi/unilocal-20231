@@ -2,20 +2,19 @@ package co.edu.eam.unilocal.modelo
 
 import java.util.*
 
-class Comentario(var texto:String,
-                 var idUsuario:Int,
-                 var idLugar:Int,
-                 var calificacion:Int) {
+class Comentario() {
 
-    constructor(id:Int, texto:String, idUsuario:Int, idLugar: Int, calificacion: Int):this(texto, idUsuario, idLugar, calificacion){
-        this.id = id
+    constructor(texto:String, idUsuario:String, calificacion:Int):this(){
+        this.texto = texto
+        this.idUsuario = idUsuario
+        this.calificacion = calificacion
     }
 
-    var id:Int = 0
+    var key:String = ""
+    var texto:String = ""
+    var idUsuario:String = ""
+    var calificacion:Int = 0
     var fecha:Date = Date()
 
-    override fun toString(): String {
-        return "Comentario(id=$id, texto='$texto', idUsuario=$idUsuario, idLugar=$idLugar, calificacion=$calificacion, fecha=$fecha)"
-    }
 
 }

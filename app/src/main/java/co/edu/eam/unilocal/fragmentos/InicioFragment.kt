@@ -13,19 +13,26 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import co.edu.eam.unilocal.R
-import co.edu.eam.unilocal.bd.Lugares
+import co.edu.eam.unilocal.actividades.DetalleLugarActivity
+import co.edu.eam.unilocal.actividades.MainActivity
 import co.edu.eam.unilocal.databinding.FragmentInicioBinding
 import co.edu.eam.unilocal.modelo.EstadoLugar
-import com.google.android.gms.location.LocationServices
+import co.edu.eam.unilocal.modelo.Lugar
+import co.edu.eam.unilocal.sqlite.UnilocalDbHelper
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.GoogleMap.OnInfoWindowClickListener
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 
-class InicioFragment : Fragment(), OnMapReadyCallback {
+class InicioFragment : Fragment(), OnMapReadyCallback, OnInfoWindowClickListener {
 
+    lateinit var bd:UnilocalDbHelper
     lateinit var binding: FragmentInicioBinding
     lateinit var gMap:GoogleMap
     private var tienePermiso = false
@@ -35,10 +42,15 @@ class InicioFragment : Fragment(), OnMapReadyCallback {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        //bd = UnilocalDbHelper(requireContext())
+
         permissionsResultCallback = registerForActivityResult(
             ActivityResultContracts.RequestPermission()){
             when (it) {
-                true -> { println("Permiso aceptado") }
+                true -> {
+                    tienePermiso = true
+                    println("Permiso aceptado")
+                }
                 false -> { println("Permiso denegado") }
             }
         }
@@ -68,9 +80,44 @@ class InicioFragment : Fragment(), OnMapReadyCallback {
             gMap.isMyLocationEnabled = true
         }
 
-        Lugares.listarPorEstado( EstadoLugar.ACEPTADO ).forEach{
-            gMap.addMarker( MarkerOptions().position( LatLng( it.posicion.lat, it.posicion.lng ) ).title( it.nombre ) )
+        val estado = (requireActivity() as MainActivity).estadoConexion
+
+        if(estado) {
+
+            Firebase.firestore
+                .collection("lugares")
+                .whereEqualTo("estado", EstadoLugar.ACEPTADO)
+                .get()
+                .addOnSuccessListener {
+
+                    for( doc in it ){
+                        var lugar = doc.toObject(Lugar::class.java)
+                        lugar.key = doc.id
+
+                        gMap.addMarker(
+                            MarkerOptions().position(LatLng(lugar.posicion.lat, lugar.posicion.lng))
+                                .title(lugar.nombre)
+                        )!!.tag = lugar.key
+
+                        //bd.guardarLugar(lugar)
+
+                    }
+
+                }
+                .addOnFailureListener {
+                    Log.e("LISTA_LUGARES", it.message.toString())
+                }
+
+        }else{
+            bd.listarLugares().forEach {
+                gMap.addMarker(
+                    MarkerOptions().position(LatLng(it.posicion.lat, it.posicion.lng))
+                        .title(it.nombre)
+                )!!.tag = it.key
+            }
         }
+
+        gMap.setOnInfoWindowClickListener(this)
 
         gMap.moveCamera(CameraUpdateFactory.newLatLngZoom(defaultLocation, 12F))
 
@@ -82,6 +129,12 @@ class InicioFragment : Fragment(), OnMapReadyCallback {
         } else {
             permissionsResultCallback.launch(Manifest.permission.ACCESS_FINE_LOCATION)
         }
+    }
+
+    override fun onInfoWindowClick(p0: Marker) {
+        val intent = Intent(requireContext(), DetalleLugarActivity::class.java)
+        intent.putExtra("codigo", p0.tag.toString())
+        requireContext().startActivity(intent)
     }
 
     /*private fun obtenerUbicacion() {
@@ -106,6 +159,7 @@ class InicioFragment : Fragment(), OnMapReadyCallback {
             Log.e("Exception: %s", e.message, e)
         }
     }*/
+
 
 
 

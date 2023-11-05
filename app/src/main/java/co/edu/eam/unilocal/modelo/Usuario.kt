@@ -1,14 +1,30 @@
 package co.edu.eam.unilocal.modelo
 
-class Usuario(id: Int, nombre: String, var nickname:String, correo: String, password: String): Persona(id, nombre, correo, password){
+import android.content.ContentValues
+import co.edu.eam.unilocal.sqlite.UsuarioContrato
 
-    var favoritos:ArrayList<Int> = ArrayList()
+class Usuario() {
 
-    fun esFavorito(codigo:Int):Boolean{
-        return favoritos.contains(codigo)
+    var nombre:String = ""
+    var nickname:String = ""
+    var key:String = ""
+    var rol:Rol = Rol.CLIENTE
+
+    constructor(nombre: String, nickname:String, rol:Rol):this (){
+        this.nombre = nombre
+        this.nickname = nickname
+        this.rol = rol
     }
 
-    override fun toString(): String {
-        return "Usuario(nickname='$nickname') ${super.toString()}"
+    fun toContentValues():ContentValues{
+
+        val values = ContentValues()
+        values.put(UsuarioContrato.NOMBRE, nombre )
+        values.put(UsuarioContrato.NICKNAME, nickname )
+        //values.put(UsuarioContrato.CORREO, correo )
+        //values.put(UsuarioContrato.PASSWORD, password )
+
+        return values
     }
+
 }

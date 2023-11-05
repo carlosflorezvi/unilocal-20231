@@ -83,6 +83,8 @@
     <!-- Validaciones -->
     <string name="sin_registros">Aún no hay registros</string>
     <string name="todos_obligatorios">Todos los campos son obligatorios</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
 </resources>

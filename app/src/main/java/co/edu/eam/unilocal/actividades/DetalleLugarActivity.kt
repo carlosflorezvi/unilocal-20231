@@ -18,14 +18,11 @@ class DetalleLugarActivity : AppCompatActivity() {
         binding = ActivityDetalleLugarBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val sh = getSharedPreferences("sesion", Context.MODE_PRIVATE)
-        val codigoUsuario = sh.getInt("codigo_usuario", 0)
+        val codigoLugar = intent.extras!!.getString("codigo")
 
-        val codigoLugar = intent.extras!!.getInt("codigo")
+        if(codigoLugar != null) {
 
-        if(codigoLugar != 0) {
-
-            binding.viewPager.adapter = ViewPagerAdapter(this, codigoLugar, codigoUsuario)
+            binding.viewPager.adapter = ViewPagerAdapter(this, codigoLugar)
             TabLayoutMediator(binding.tabs, binding.viewPager) { tab, pos ->
                 when (pos) {
                     0 -> tab.text = getString(R.string.info_lugar)

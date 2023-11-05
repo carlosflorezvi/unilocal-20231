@@ -6,9 +6,18 @@
     android:layout_height="match_parent"
     tools:context=".actividades.ModeradorActivity">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/lista_lugares"
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tabs"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="wrap_content"
+        app:tabTextAppearance="@android:style/TextAppearance.Widget.TabWidget"
+        app:tabIndicatorFullWidth="false"
+        app:tabMode="fixed" />
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/view_pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/tabs"/>
 
 </RelativeLayout>

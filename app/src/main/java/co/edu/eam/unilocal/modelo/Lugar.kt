@@ -1,11 +1,14 @@
 package co.edu.eam.unilocal.modelo
 
+import android.content.ContentValues
+import co.edu.eam.unilocal.sqlite.LugarContrato
+import co.edu.eam.unilocal.sqlite.UsuarioContrato
 import java.util.*
 import kotlin.collections.ArrayList
 
 class Lugar() {
 
-    constructor( nombre:String, descripcion:String, idCreador:Int, estado:EstadoLugar, idCategoria:Int, direccion:String, posicion: Posicion, idCiudad:Int):this(){
+    constructor( nombre:String, descripcion:String, idCreador:String, estado:EstadoLugar, idCategoria:Int, direccion:String, posicion: Posicion, idCiudad:Int):this(){
         this.nombre = nombre
         this.descripcion = descripcion
         this.idCreador = idCreador
@@ -16,7 +19,7 @@ class Lugar() {
         this.idCiudad = idCiudad
     }
 
-    constructor( nombre:String, descripcion:String, idCreador:Int, estado:EstadoLugar, idCategoria:Int, direccion:String, idCiudad:Int):this(){
+    constructor( nombre:String, descripcion:String, idCreador:String, estado:EstadoLugar, idCategoria:Int, direccion:String, idCiudad:Int):this(){
         this.nombre = nombre
         this.descripcion = descripcion
         this.idCreador = idCreador
@@ -26,10 +29,22 @@ class Lugar() {
         this.idCiudad = idCiudad
     }
 
-    var id:Int = 0
+    constructor(id:Int, nombre: String, descripcion: String, lat:Double, lng:Double, direccion: String, idCategoria: Int, idCreador: String):this(){
+        this.nombre = nombre
+        this.descripcion = descripcion
+
+        val pos = Posicion(lat, lng)
+        this.posicion = pos
+
+        this.direccion = direccion
+        this.idCategoria = idCategoria
+        this.idCreador = idCreador
+    }
+
+    var key:String = ""
     var nombre:String = ""
     var descripcion:String = ""
-    var idCreador:Int = 0
+    var idCreador:String = ""
     var estado:EstadoLugar = EstadoLugar.SIN_REVISAR
     var idCategoria:Int = 0
     var direccion:String = ""
@@ -102,21 +117,20 @@ class Lugar() {
         return mensaje
     }
 
-    fun obtenerCalificacionPromedio(comentarios:ArrayList<Comentario>):Int{
-        var promedio = 0
+    fun toContentValues(): ContentValues {
 
-        if(comentarios.size > 0) {
-            val suma = comentarios.stream().map { c -> c.calificacion }
-                .reduce { suma, valor -> suma + valor }.get()
+        val values = ContentValues()
+        values.put(LugarContrato.NOMBRE, nombre )
+        values.put(LugarContrato.DESCRIPCION, descripcion )
+        values.put(LugarContrato.LAT, posicion.lat )
+        values.put(LugarContrato.LNG, posicion.lng )
+        values.put(LugarContrato.DIRECCION, direccion )
+        values.put(LugarContrato.CATEGORIA, idCategoria )
+        values.put(LugarContrato.ID_CREADOR, idCreador )
+        values.put(LugarContrato.KEY_FIREBASE, key )
 
-            promedio = suma/comentarios.size
-        }
-
-        return promedio
+        return values
     }
 
-    override fun toString(): String {
-        return "Lugar(id=$id, nombre='$nombre', descripcion='$descripcion', idCreador=$idCreador, estado=$estado, idCategoria=$idCategoria, posicion=$posicion, idCiudad=$idCiudad, imagenes=$imagenes, telefonos=$telefonos, fecha=$fecha, horarios=$horarios)"
-    }
 
 }
